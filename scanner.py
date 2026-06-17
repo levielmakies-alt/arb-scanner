@@ -2,9 +2,12 @@ import requests
 
 url = "https://api.elections.kalshi.com/trade-api/v2/events/KXNEWPOPE-70"
 
-r = requests.get(url, timeout=20)
+data = requests.get(url, timeout=20).json()
+event = data["event"]
 
-print("Status:", r.status_code)
-print("Content-Type:", r.headers.get("content-type"))
-print("Body:")
-print(r.text[:2000])
+print("Title:", event.get("title"))
+print("Ticker:", event.get("event_ticker"))
+print("Available fields:")
+
+for key in event.keys():
+    print(key)
