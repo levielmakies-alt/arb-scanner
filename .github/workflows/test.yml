@@ -1,12 +1,22 @@
-name: Telegram Test
+name: Scanner
 
 on:
   workflow_dispatch:
-  push:
+  schedule:
+    - cron: "*/15 * * * *"
 
 jobs:
-  test:
+  scan:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Telegram Message
-        run: curl -s "https://api.telegram.org/bot8667226754:AAFINvhhbBmzqMy5hZgRv3SrG58coiBC6Bk/sendMessage?chat_id=999772135&text=GitHub%20Action%20Works"
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Run scanner
+        run: python scanner.py
