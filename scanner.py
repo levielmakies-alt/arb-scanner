@@ -1,11 +1,16 @@
 import requests
 
 poly = requests.get(
-    "https://gamma-api.polymarket.com/markets?limit=100",
+    "https://gamma-api.polymarket.com/markets?limit=500",
     timeout=20
 ).json()
 
-print("Markets loaded:", len(poly))
+keywords = ["Mars", "Pope", "Taiwan", "Bitcoin", "Trump"]
 
-for market in poly[:20]:
-    print(market.get("question", ""))
+for market in poly:
+    question = market.get("question", "")
+
+    for word in keywords:
+        if word.lower() in question.lower():
+            print(question)
+            break
