@@ -1,3 +1,4 @@
+import requests
 ticker = "KXNEWPOPE-70"
 
 r = requests.get(
