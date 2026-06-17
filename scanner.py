@@ -16,8 +16,7 @@ try:
 
         if len(markets) > 0:
             requests.get(
-                "https://api.telegram.org/bot8667226754:AAFINvhhbBmzqMy5hZgRv3SrG58coiBC6Bk
-/sendMessage",
+                "https://api.telegram.org/bot8667226754:AAFINvhhbBmzqMy5hZgRv3SrG58coiBC6Bk/sendMessage",
                 params={
                     "chat_id": "999772135",
                     "text": f"Scanner alive. Found {len(markets)} markets."
