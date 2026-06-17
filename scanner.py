@@ -1,21 +1,20 @@
 import requests
 
-print("Testing Polymarket + Kalshi APIs...")
+print("Loading markets...")
 
-try:
-    poly = requests.get(
-        "https://gamma-api.polymarket.com/markets",
-        timeout=20
-    )
+poly = requests.get(
+    "https://gamma-api.polymarket.com/markets",
+    timeout=20
+).json()
 
-    print("Polymarket status:", poly.status_code)
+kalshi = requests.get(
+    "https://api.elections.kalshi.com/trade-api/v2/events",
+    timeout=20
+).json()
 
-    kalshi = requests.get(
-        "https://api.elections.kalshi.com/trade-api/v2/events",
-        timeout=20
-    )
+print("Polymarket markets:", len(poly))
 
-    print("Kalshi status:", kalshi.status_code)
-
-except Exception as e:
-    print("Error:", e)
+if "events" in kalshi:
+    print("Kalshi events:", len(kalshi["events"]))
+else:
+    print("Kalshi response:", kalshi)
