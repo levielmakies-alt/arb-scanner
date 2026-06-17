@@ -5,9 +5,5 @@ kalshi = requests.get(
     timeout=20
 ).json()
 
-for event in kalshi["events"]:
-    title = event.get("title", "")
-    if "taiwan" in title.lower() or "china" in title.lower():
-        print(title)
-        print("Ticker:", event.get("event_ticker"))
-        print("---")
+for event in kalshi["events"][:50]:
+    print(event.get("title"))
