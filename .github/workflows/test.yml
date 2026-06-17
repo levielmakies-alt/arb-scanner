@@ -1,0 +1,16 @@
+name: Telegram Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Telegram Message
+        run: |
+          curl -X POST "https://api.telegram.org/bot8667226754:AAFINvhhbBmzqMy5hZgRv3SrG58coiBC6Bk
+/sendMessage" \
+          -d chat_id=999772135 \
+          -d text="GitHub Action Works!"
