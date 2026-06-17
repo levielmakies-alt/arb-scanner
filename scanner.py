@@ -10,23 +10,37 @@ kalshi = requests.get(
     timeout=20
 ).json()["events"]
 
-keywords = ["pope", "openai", "anthropic", "trump", "taiwan", "china", "bitcoin", "mars"]
+keywords = [
+    "next pope",
+    "taiwan",
+    "bitcoin",
+    "openai",
+    "anthropic",
+    "mars",
+    "china",
+]
 
 matches = []
 
 for p in poly:
-    pq = p.get("question", "")
+    pq = p.get("question", "").lower()
     price = p.get("lastTradePrice")
 
     for k in kalshi:
-        kt = k.get("title", "")
+        kt = k.get("title", "").lower()
 
         for word in keywords:
-            if word in pq.lower() and word in kt.lower():
-                matches.append(f"Possible match:\nPolymarket: {pq}\nPoly price: {price}\nKalshi: {kt}\nKalshi ticker: {k.get('event_ticker')}")
+            if word in pq and word in kt:
+                matches.append(
+                    f"Possible match:\n"
+                    f"Polymarket: {p.get('question')}\n"
+                    f"Poly price: {price}\n"
+                    f"Kalshi: {k.get('title')}\n"
+                    f"Kalshi ticker: {k.get('event_ticker')}"
+                )
                 break
 
 if matches:
-    print("\n\n---\n\n".join(matches[:5]))
+    print("\n\n---\n\n".join(matches[:10]))
 else:
     print("No possible matches found.")
