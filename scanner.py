@@ -1,27 +1,21 @@
 import requests
 
-print("Scanning Polymarket...")
+print("Testing Polymarket + Kalshi APIs...")
 
 try:
-    r = requests.get(
+    poly = requests.get(
         "https://gamma-api.polymarket.com/markets",
         timeout=20
     )
 
-    print("Status:", r.status_code)
+    print("Polymarket status:", poly.status_code)
 
-    if r.status_code == 200:
-        markets = r.json()
-        print("Markets found:", len(markets))
+    kalshi = requests.get(
+        "https://api.elections.kalshi.com/trade-api/v2/events",
+        timeout=20
+    )
 
-        if len(markets) > 0:
-            requests.get(
-                "https://api.telegram.org/bot8667226754:AAFINvhhbBmzqMy5hZgRv3SrG58coiBC6Bk/sendMessage",
-                params={
-                    "chat_id": "999772135",
-                    "text": f"Scanner alive. Found {len(markets)} markets."
-                }
-            )
+    print("Kalshi status:", kalshi.status_code)
 
 except Exception as e:
     print("Error:", e)
