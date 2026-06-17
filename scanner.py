@@ -7,6 +7,7 @@ kalshi = requests.get(
 
 for event in kalshi["events"]:
     title = event.get("title", "")
-    if "bitcoin" in title.lower():
+    if "taiwan" in title.lower() or "china" in title.lower():
         print(title)
+        print("Ticker:", event.get("event_ticker"))
         print("---")
