@@ -5,5 +5,9 @@ kalshi = requests.get(
     timeout=20
 ).json()
 
-for event in kalshi["events"][:50]:
-    print(event.get("title"))
+for event in kalshi["events"]:
+    title = event.get("title", "")
+    if "pope" in title.lower():
+        print(title)
+        print("Ticker:", event.get("event_ticker"))
+        print("---")
